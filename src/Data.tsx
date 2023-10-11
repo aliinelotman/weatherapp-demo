@@ -1,16 +1,11 @@
 import axios from 'axios';
-import xml2js from 'xml2js';
 
-async function fetchAndParseXMLData() {
+export async function fetchWeatherData() {
   try {
-    const response = await axios.get('https://www.ilmateenistus.ee/ilma_andmed/xml/forecast.php');
-    const xmlData = response.data;
-
-    const parser = new xml2js.Parser();
-    const jsonData = await parser.parseStringPromise(xmlData);
-
-    return jsonData;
+    const response = await axios.get('https://api.open-meteo.com/v1/forecast?latitude=58.3806&longitude=26.7251&hourly=temperature_2m,apparent_temperature,precipitation_probability,cloudcover&daily=sunrise,sunset,uv_index_max&timezone=Europe%2FBerlin');
+    const weatherData = response.data;
+    return weatherData;
   } catch (error) {
-    console.error('Error fetching or parsing XML data:', error);
+    console.error('Error fetching weather data:', error);
   }
 }

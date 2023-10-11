@@ -1,21 +1,38 @@
-import React, { useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import * as d3 from 'd3';
+import { fetchWeatherData } from './Data'
 
-  
-function D3BarChart({ data }: any) {
-  const svgRef = useRef();
+export function D3BarChart() {
+    const svgRef = useRef<SVGSVGElement | null>(null);
+    const [weatherData, setWeatherData] = useState(null);
+    const [dataFetched, setDataFetched] = useState(false);
 
-  useEffect(() => {
-    // Create the SVG container for the chart
-    const svg = d3.select(svgRef.current);
+    useEffect(() => {
+        if (!dataFetched) {
+            fetchWeatherData()
+                .then(data => {
+                    setWeatherData(data);
+                    setDataFetched(true);
+                })
+                .catch(error => {
+                    console.error('Error fetching data:', error);
+                });
+        }
+    }, [dataFetched]);
 
-    // Your D3.js code to create the graph goes here
+    useEffect(() => {
+        if (weatherData) {
+            const svg = d3.select(svgRef.current);
+            //  TODO: D3.js code to create the graph
+        }
+    }, [weatherData]);
 
-  }, [data]);
-
-  return (
-    <div>
-      <svg ref={svgRef} width={600} height={400}></svg>
-    </div>
-  );
+    return (
+        <div>
+            <svg ref={svgRef} width={600} height={400}
+            style={{
+                border: "2px solid gold"
+              }}></svg>
+        </div>
+    );
 }
