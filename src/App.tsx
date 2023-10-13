@@ -1,6 +1,6 @@
 import { useState } from 'react'
+import DataTable from './Data';
 import ilmLogo from './assets/day-cloud-rainbow-icon.png'
-import { D3BarChart } from './WeatherGraph';
 import './App.css';
 
 function App() {
@@ -16,8 +16,9 @@ function App() {
         </a>
       </div>
       <h1>Ilm Eestis praegu</h1>
-      <h1>My Weather Chart</h1>
-      <D3BarChart /> {/* Render your D3BarChart component here */}
+      <div className="App">
+      <DataTable />
+    </div>
       <div className="card">
         <button onClick={() => setCount((count) => count + 1)}>
           Kliki, siia kui sul on torm. Tormiseid kasutajaid: {count}
