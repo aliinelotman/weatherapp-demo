@@ -1,33 +1,26 @@
 import { useState } from 'react'
-import DataTable from './Data';
-import ilmLogo from './assets/day-cloud-rainbow-icon.png'
+import { BrowserRouter as Router, Route, Routes, BrowserRouter } from 'react-router-dom'
+
 import './App.css';
 
+import Home from './Home.tsx'
+import WeatherGraph from './WeatherGraph.tsx';
+import Navigationbar from './Navigationbar.tsx';
+
+
 function App() {
-  const [count, setCount] = useState(0)
-
-
 
   return (
-    <>
-      <div>
-        <a href="https://www.ilmateenistus.ee/ilm/prognoosid/4-oopaeva-prognoos/" target="_blank">
-          <img src={ilmLogo} className="logo ilm" alt="Ilm logo" />
-        </a>
-      </div>
-      <h1>Ilm Eestis praegu</h1>
-      <div className="App">
-      <DataTable />
+    <div>
+    <BrowserRouter>
+    <Navigationbar />
+        <Routes>
+         <Route path="/" element={<Home/>} />
+         <Route path="weathergraph" element={<WeatherGraph/>} />
+        </Routes> 
+    </BrowserRouter>
+   
     </div>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          Kliki, siia kui sul on torm. Tormiseid kasutajaid: {count}
-        </button>
-        <p>
-          Kogu info pärineb riiklikust ilmateenistusest.
-        </p>
-      </div>
-    </>
   )
 }
 
