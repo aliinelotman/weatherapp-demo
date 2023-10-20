@@ -11,7 +11,7 @@ interface WeatherData {
   hourly: HourlyData;
 }
 
-const App: React.FC = () => {
+const Data: React.FC = () => {
   const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -31,16 +31,16 @@ const App: React.FC = () => {
 
   return (
     <div>
-      <h1>Hourly Weather Data</h1>
+      <h3>Jahedus igal tunnil täna:</h3>
       {loading ? (
-        <p>Loading...</p>
+        <p>Laadin...</p>
       ) : weatherData ? (
         <Table striped bordered hover>
           <thead>
             <tr>
-              <th>Time</th>
-              <th>Temperature (°C)</th>
-              <th>Apparent Temperature (°C)</th>
+              <th>Aeg</th>
+              <th>Tegelik temperatuur (°C)</th>
+              <th>Tajutav jahedus (°C)</th>
             </tr>
           </thead>
           <tbody>
@@ -54,10 +54,12 @@ const App: React.FC = () => {
           </tbody>
         </Table>
       ) : (
-        <p>No data available.</p>
+        <p>Andmed ei ole saadaval.</p>
       )}
+      
     </div>
   );
 };
 
-export default App;
+
+export default Data;
